@@ -6,6 +6,10 @@ import java.util.UUID;
 public class Todo {
     private UUID mId;
     private String mTitle;
+
+
+
+    private String mDescription;
     private String mDetail;
     private Date mDate;
 
@@ -24,6 +28,10 @@ public class Todo {
     public void setmTitle(String mTitle) {
         this.mTitle = mTitle;
     }
+
+    public String getmDescription() { return mDescription; }
+
+    public void setmDescription(String mDescription) { this.mDescription = mDescription; }
 
     public String getmDetail() {
         return mDetail;

@@ -44,7 +44,7 @@ public class TodoListFragment extends Fragment {
                 Todo todo = new Todo();
                 TodoModel.get(getActivity()).addTodo(todo);
 
-                Intent intent = TodoActivity.newIntent(getActivity(), todo.getmId());
+                Intent intent = TodoPagerActivity.newIntent(getActivity(), todo.getmId());
                 startActivity(intent);
 
                 return true;
@@ -79,7 +79,7 @@ public class TodoListFragment extends Fragment {
 
     private void updateUI(){
 
-        ArrayList todos = new ArrayList<>();
+        ArrayList todos;
         TodoModel todoModel = TodoModel.get(getContext());
         todos = todoModel.getTodos();
 

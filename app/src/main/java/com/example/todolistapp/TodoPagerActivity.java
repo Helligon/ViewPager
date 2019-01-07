@@ -20,7 +20,7 @@ public class TodoPagerActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private List<Todo> mTodos;
 
-    public static Intent newIntent(Context packageContext, UUID todoId){
+    public static Intent newIntent(Context packageContext, int todoId){
         Intent intent = new Intent(packageContext, TodoPagerActivity.class);
         intent.putExtra(EXTRA_TODO_ID, todoId);
         return intent;
@@ -31,7 +31,7 @@ public class TodoPagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_pager);
 
-        UUID todoId = (UUID) getIntent().getSerializableExtra(EXTRA_TODO_ID);
+        int todoId = (int) getIntent().getSerializableExtra(EXTRA_TODO_ID);
 
         mViewPager = findViewById(R.id.todo_view_pager);
 
@@ -52,7 +52,7 @@ public class TodoPagerActivity extends AppCompatActivity {
         });
 
         for (int i = 0; i < mTodos.size(); i++){
-            if (mTodos.get(i).getmId().equals(todoId)) {
+            if (mTodos.get(i).getmId() == todoId) {
                 mViewPager.setCurrentItem(i);
                 break;
             }

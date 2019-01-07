@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -33,7 +34,7 @@ public class TodoFragment extends Fragment {
     Rather than the calling the constructor directly, Activity(s) should call newInstance
     and pass required parameters that the fragment needs to create its arguments.
      */
-    public static TodoFragment newInstance(UUID todoId) {
+    public static TodoFragment newInstance(int todoId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_TODO_ID, todoId);
 
@@ -47,7 +48,7 @@ public class TodoFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        UUID todoId = (UUID) getArguments().getSerializable(ARG_TODO_ID);
+        int todoId = (int) getArguments().getSerializable(ARG_TODO_ID);
 
         mTodo = TodoModel.get(getActivity()).getTodo(todoId);
 
@@ -57,6 +58,24 @@ public class TodoFragment extends Fragment {
     public void onCreateOptionsMenu(Menu deleteMenu, MenuInflater inflater) {
         super.onCreateOptionsMenu(deleteMenu, inflater);
         inflater.inflate(R.menu.fragment_todo, deleteMenu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.delete_todo:
+
+                TodoModel.get(getActivity()).deleteTodo(mTodo);
+
+                getActivity().finish();
+
+                
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Nullable
@@ -107,8 +126,6 @@ public class TodoFragment extends Fragment {
         });
 
         mButtonDate = (Button) view.findViewById(R.id.todo_date);
-        mButtonDate.setText(mTodo.getmDate().toString());
-        mButtonDate.setEnabled(false);
 
         mCheckBoxIsComplete = (CheckBox) view.findViewById(R.id.todo_complete);
         mCheckBoxIsComplete.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -116,6 +133,8 @@ public class TodoFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.d("DEBUG **** TodoFragment","called onCheckedChanged");
                 mTodo.setmIsComplete(isChecked);
+                mButtonDate.setText(mTodo.getmDate());
+                mButtonDate.setEnabled(true);
             }
         });
 

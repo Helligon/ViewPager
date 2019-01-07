@@ -1,24 +1,30 @@
 package com.example.todolistapp;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
+@Entity(tableName = "todo_table")
 public class Todo {
-    private UUID mId;
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    private int mId;
+    @ColumnInfo(name = "title")
     private String mTitle;
-
-
-
+    @ColumnInfo(name = "description")
     private String mDescription;
-    private String mDetail;
-    private Date mDate;
+    @ColumnInfo(name = "date")
+    private String mDate;
+    @ColumnInfo(name = "is_complete")
+    private boolean mIsComplete;
 
-    public UUID getmId() {
+    public int getmId() {
         return mId;
-    }
-
-    public void setmId(UUID mId) {
-        this.mId = mId;
     }
 
     public String getmTitle() {
@@ -33,20 +39,8 @@ public class Todo {
 
     public void setmDescription(String mDescription) { this.mDescription = mDescription; }
 
-    public String getmDetail() {
-        return mDetail;
-    }
-
-    public void setmDetail(String mDetail) {
-        this.mDetail = mDetail;
-    }
-
-    public Date getmDate() {
+    public String getmDate() {
         return mDate;
-    }
-
-    public void setmDate(Date mDate) {
-        this.mDate = mDate;
     }
 
     public boolean ismIsComplete() {
@@ -57,10 +51,8 @@ public class Todo {
         this.mIsComplete = mIsComplete;
     }
 
-    private boolean mIsComplete;
-
     public Todo() {
-        mId = UUID.randomUUID();
-        mDate = new Date();
+        mDate = new Date().toString();
     }
+
 }

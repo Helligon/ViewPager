@@ -1,5 +1,6 @@
 package com.example.todolistapp;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import java.util.ArrayList;
@@ -20,14 +21,11 @@ public class TodoModel {
 
     private TodoModel(Context context){
         mTodoList = new ArrayList<>();
-
-        // refactor to pattern for data plugins
-        // simulate some data for testing
+        TodoDatabase db = Room.databaseBuilder(context, TodoDatabase.class, "todo_database").build();
 
         for (int i=0; i < 3; i++){
             Todo todo = new Todo();
             todo.setmTitle("Todo title " + i);
-            todo.setmDetail("Detail for task " + todo.getmId().toString());
             todo.setmIsComplete(false);
 
             mTodoList.add(todo);
@@ -35,10 +33,10 @@ public class TodoModel {
 
     }
 
-    public Todo getTodo(UUID todoId) {
+    public Todo getTodo(int todoId) {
 
         for (Todo todo : mTodoList) {
-            if (todo.getmId().equals(todoId)){
+            if (todo.getmId() == todoId){
                 return todo;
             }
         }
@@ -55,6 +53,12 @@ public class TodoModel {
     public void addTodo(Todo todo){
 
         mTodoList.add(todo);
+
+    }
+
+    public void deleteTodo(Todo todo) {
+
+        mTodoList.remove(todo);
 
     }
 

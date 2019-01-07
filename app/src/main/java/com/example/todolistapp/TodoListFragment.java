@@ -19,7 +19,7 @@ import java.util.List;
 
 public class TodoListFragment extends Fragment {
 
-    private RecyclerView mTodoRecyclerView;
+   private RecyclerView mTodoRecyclerView;
     TodoAdapter mTodoAdapter;
 
     @Override
@@ -127,7 +127,7 @@ public class TodoListFragment extends Fragment {
         public void bind(Todo todo){
             mTodo = todo;
             mTextViewTitle.setText(mTodo.getmTitle());
-            mTextViewDate.setText(mTodo.getmDate().toString());
+            mTextViewDate.setText(mTodo.getmDate());
         }
 
     }

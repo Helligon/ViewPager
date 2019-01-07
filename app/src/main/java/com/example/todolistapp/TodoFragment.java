@@ -18,8 +18,6 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 
-import java.util.UUID;
-
 public class TodoFragment extends Fragment {
 
     private static final String ARG_TODO_ID = "todo_id";
@@ -69,8 +67,6 @@ public class TodoFragment extends Fragment {
 
                 getActivity().finish();
 
-                
-
                 return true;
 
             default:
@@ -87,7 +83,7 @@ public class TodoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_todo, container, false);
 
         mEditTextTitle = (EditText) view.findViewById(R.id.todo_title);
-        mEditTextTitle.setText(mTodo.getmTitle());
+        mEditTextTitle.setText(mTodo.getTitle());
         mEditTextTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -96,7 +92,7 @@ public class TodoFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mTodo.setmTitle(s.toString());
+                mTodo.setTitle(s.toString());
             }
 
             @Override
@@ -106,7 +102,7 @@ public class TodoFragment extends Fragment {
         });
 
         mEditDescriptionTitle = (EditText) view.findViewById(R.id.todo_description);
-        mEditDescriptionTitle.setText(mTodo.getmDescription());
+        mEditDescriptionTitle.setText(mTodo.getDescription());
         mEditDescriptionTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -115,7 +111,7 @@ public class TodoFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mTodo.setmDescription(s.toString());
+                mTodo.setDescription(s.toString());
 
             }
 
@@ -126,14 +122,19 @@ public class TodoFragment extends Fragment {
         });
 
         mButtonDate = (Button) view.findViewById(R.id.todo_date);
+        if (mTodo.getIsComplete()) {
+            mButtonDate.setText(mTodo.getDate());
+            mButtonDate.setEnabled(true);
+        }
 
         mCheckBoxIsComplete = (CheckBox) view.findViewById(R.id.todo_complete);
+        mCheckBoxIsComplete.setChecked(mTodo.getIsComplete());
         mCheckBoxIsComplete.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.d("DEBUG **** TodoFragment","called onCheckedChanged");
-                mTodo.setmIsComplete(isChecked);
-                mButtonDate.setText(mTodo.getmDate());
+                mTodo.setIsComplete(isChecked);
+                mButtonDate.setText(mTodo.getDate());
                 mButtonDate.setEnabled(true);
             }
         });

@@ -5,54 +5,65 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity(tableName = "todo_table")
 public class Todo {
+
+    private static int totalID = 0;
+
     @NonNull
     @PrimaryKey(autoGenerate = true)
-    private int mId;
+    private int Id;
     @ColumnInfo(name = "title")
-    private String mTitle;
+    private String Title;
     @ColumnInfo(name = "description")
-    private String mDescription;
+    private String Description;
     @ColumnInfo(name = "date")
-    private String mDate;
+    private String Date;
     @ColumnInfo(name = "is_complete")
-    private boolean mIsComplete;
+    private boolean IsComplete;
 
-    public int getmId() {
-        return mId;
+    public int getId() {
+
+        return Id;
+    }
+    public void setId(@NonNull int id) {
+        Id = id;
     }
 
-    public String getmTitle() {
-        return mTitle;
+    public String getTitle() {
+        return Title;
+    }
+    public void setTitle(@NonNull String title) {
+        this.Title = title;
     }
 
-    public void setmTitle(String mTitle) {
-        this.mTitle = mTitle;
+    public String getDescription() {
+        return Description;
+    }
+    public void setDescription(String description) {
+        this.Description = description;
     }
 
-    public String getmDescription() { return mDescription; }
-
-    public void setmDescription(String mDescription) { this.mDescription = mDescription; }
-
-    public String getmDate() {
-        return mDate;
+    public String getDate() {
+        return Date;
+    }
+    public void setDate(String date) {
+        this.Date = date;
     }
 
-    public boolean ismIsComplete() {
-        return mIsComplete;
+    public boolean getIsComplete() {
+        return IsComplete;
     }
-
-    public void setmIsComplete(boolean mIsComplete) {
-        this.mIsComplete = mIsComplete;
+    public void setIsComplete(boolean complete) {
+        this.IsComplete = complete;
     }
 
     public Todo() {
-        mDate = new Date().toString();
+        setId(totalID++);
+        Date = new Date().toString();
     }
+
 
 }

@@ -44,7 +44,7 @@ public class TodoListFragment extends Fragment {
                 Todo todo = new Todo();
                 TodoModel.get(getActivity()).addTodo(todo);
 
-                Intent intent = TodoPagerActivity.newIntent(getActivity(), todo.getmId());
+                Intent intent = TodoPagerActivity.newIntent(getActivity(), todo.getId());
                 startActivity(intent);
 
                 return true;
@@ -112,22 +112,21 @@ public class TodoListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            // have a Toast for now
             Toast.makeText(
                     getActivity(),
-                    mTodo.getmTitle() + " clicked",
+                    mTodo.getTitle() + " clicked",
                     Toast.LENGTH_SHORT)
                     .show();
 
-            Intent intent = TodoPagerActivity.newIntent(getActivity(), mTodo.getmId());
+            Intent intent = TodoPagerActivity.newIntent(getActivity(), mTodo.getId());
             startActivity(intent);
 
         }
 
         public void bind(Todo todo){
             mTodo = todo;
-            mTextViewTitle.setText(mTodo.getmTitle());
-            mTextViewDate.setText(mTodo.getmDate());
+            mTextViewTitle.setText(mTodo.getTitle());
+            mTextViewDate.setText(mTodo.getDate());
         }
 
     }

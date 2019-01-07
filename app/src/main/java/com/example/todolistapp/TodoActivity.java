@@ -7,24 +7,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
-import java.util.UUID;
-
 public class TodoActivity extends AppCompatActivity {
 
     public static final String EXTRA_TODO_ID = "todo_id";
 
-    public static Intent newIntent(Context packageContext, UUID todoId) {
+    public static Intent newIntent(Context packageContext, int todoId) {
         Intent intent = new Intent(packageContext, TodoActivity.class);
         intent.putExtra(EXTRA_TODO_ID, todoId);
         return intent;
     }
 
-    /*
-    To decouple the fragment and make it reusable, the TodoFragment has a newInstance method
-    that receives a todoId and returns the fragment
-     */
     protected Fragment createFragment(){
-        UUID todoId = (UUID) getIntent().getSerializableExtra(EXTRA_TODO_ID);
+        int todoId = (int) getIntent().getSerializableExtra(EXTRA_TODO_ID);
         return TodoFragment.newInstance(todoId);
     }
 

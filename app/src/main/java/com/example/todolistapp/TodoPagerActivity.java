@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.List;
-import java.util.UUID;
 
 public class TodoPagerActivity extends AppCompatActivity {
 
@@ -42,7 +41,7 @@ public class TodoPagerActivity extends AppCompatActivity {
             @Override
             public Fragment getItem(int position) {
                 Todo todo = mTodos.get(position);
-                return TodoFragment.newInstance(todo.getmId());
+                return TodoFragment.newInstance(todo.getId());
             }
 
             @Override
@@ -52,7 +51,7 @@ public class TodoPagerActivity extends AppCompatActivity {
         });
 
         for (int i = 0; i < mTodos.size(); i++){
-            if (mTodos.get(i).getmId() == todoId) {
+            if (mTodos.get(i).getId() == todoId) {
                 mViewPager.setCurrentItem(i);
                 break;
             }

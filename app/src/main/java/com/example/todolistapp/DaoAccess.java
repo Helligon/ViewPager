@@ -12,9 +12,8 @@ public interface DaoAccess {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertOnlySingleTodo (Todo todo);
-    @Query("SELECT * FROM todo_table WHERE mId = :todoID")
+    @Query("SELECT * FROM todo_table WHERE Id = :todoID")
     Todo fetchOneTodoByTodoID (int todoID);
-    @Query("SELECT Todo todo FROM todo_table WHERE mId = :todo")
     @Update
     void updateTodo (Todo todo);
     @Delete
